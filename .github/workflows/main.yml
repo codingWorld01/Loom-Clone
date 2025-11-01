@@ -1,0 +1,24 @@
+name: Deploy NextJS App
+
+on:
+  push:
+    branches: [ main ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: deploy
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5.0.0 
+      - name: Install Dependencies
+        run: npm install
+      - name: Build NextJS App
+        run: npm run build
+      - name: Deploy App
+        run: echo "Deploying App...."
